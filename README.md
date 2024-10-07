@@ -2,11 +2,11 @@
 
 ## Atualize os seus dados
 
-- Nome:
-- Matrícula:
-- Curso:
-- Semestre/Ano correntes:
-- Link para o seu GitHub:
+- Nome: Daniele Almeida
+- Matrícula: 18.2.8100
+- Curso: SI
+- Semestre/Ano correntes: 2024
+- Link para o seu GitHub: [8Dani](https://github.com/8Dani)
 
 ## [Projeto final:](./Projeto/README.md)
 
