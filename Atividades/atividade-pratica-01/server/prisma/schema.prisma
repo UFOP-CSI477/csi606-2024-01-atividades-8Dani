@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Estado {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  sigla String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  cidades Cidade[]
+
+  @@map("estados")
+}
+
+model Cidade {
+  id   Int    @id @default(autoincrement())
+  nome String
+
+  // Chave estrangeira: estados->id
+  // -- Atributo correspondente à chave estrangeira
+  estado_id Int
+  // -- Relação entre modelos/entidades
+  estado    Estado @relation(fields: [estado_id], references: [id])
+
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
+  Pessoa      Pessoa[]
+  LocalColeta LocalColeta[]
+}
+
+model TipoSanguineo {
+  id        Int      @id @default(autoincrement())
+  tipo      String
+  fator     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Pessoa    Pessoa[]
+}
+
+model Pessoa {
+  id          Int           @id @default(autoincrement())
+  nome        String
+  rua         String
+  numero      String
+  complemento String
+  rg          String
+  cidadeId    Int
+  tipoId      Int
+  cidade      Cidade        @relation(fields: [cidadeId], references: [id])
+  tipo        TipoSanguineo @relation(fields: [tipoId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  doacoes     Doacao[]
+}
+
+model LocalColeta {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  rua         String
+  numero      String
+  complemento String
+  cidadeId    Int
+  cidade      Cidade   @relation(fields: [cidadeId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  doacoes     Doacao[]
+}
+
+model Doacao {
+  id        Int         @id @default(autoincrement())
+  pessoaId  Int
+  localId   Int
+  data      DateTime
+  pessoa    Pessoa      @relation(fields: [pessoaId], references: [id])
+  local     LocalColeta @relation(fields: [localId], references: [id])
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}

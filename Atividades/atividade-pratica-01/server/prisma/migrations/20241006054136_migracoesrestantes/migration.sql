@@ -1,0 +1,49 @@
+-- CreateTable
+CREATE TABLE "TipoSanguineo" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "tipo" TEXT NOT NULL,
+    "fator" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Pessoa" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nome" TEXT NOT NULL,
+    "rua" TEXT NOT NULL,
+    "numero" TEXT NOT NULL,
+    "complemento" TEXT NOT NULL,
+    "rg" TEXT NOT NULL,
+    "cidadeId" INTEGER NOT NULL,
+    "tipoId" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "Pessoa_cidadeId_fkey" FOREIGN KEY ("cidadeId") REFERENCES "Cidade" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Pessoa_tipoId_fkey" FOREIGN KEY ("tipoId") REFERENCES "TipoSanguineo" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "LocalColeta" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nome" TEXT NOT NULL,
+    "rua" TEXT NOT NULL,
+    "numero" TEXT NOT NULL,
+    "complemento" TEXT NOT NULL,
+    "cidadeId" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "LocalColeta_cidadeId_fkey" FOREIGN KEY ("cidadeId") REFERENCES "Cidade" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Doacao" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "pessoaId" INTEGER NOT NULL,
+    "localId" INTEGER NOT NULL,
+    "data" DATETIME NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "Doacao_pessoaId_fkey" FOREIGN KEY ("pessoaId") REFERENCES "Pessoa" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Doacao_localId_fkey" FOREIGN KEY ("localId") REFERENCES "LocalColeta" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
