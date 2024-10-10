@@ -32,7 +32,7 @@ As funcionalidades propostas foram impplementadas. Porém, para melhorar o uso d
 - Quando fizer o logout, o usuário será redirecionado para a Home Page.
 
 ### 4. Principais desafios e dificuldades
-- A parte do backend foi a mais difícil, principalmente para realizar o cadastro e a autenticação de usuários. Foram várias tentativas e erros até que os processos ocorressem de forma satisfatória. Pesquisando os erros na internet (com a ajuda do stackoverflow), foi possível encontrar algumas das soluções. Porém, continuei tendo alguns problemas devido à versão 
+- A parte do backend foi a mais difícil, principalmente para realizar o cadastro e a autenticação de usuários. Foram várias tentativas e erros até que os processos ocorressem de forma satisfatória. Pesquisando os erros na internet (com a ajuda do stackoverflow), foi possível encontrar algumas das soluções. Porém, continuei tendo alguns problemas devido à versão do webpack que, infelizmente, ainda não consegui solucionar.
 
 ### 5. Instruções para instalação e execução
 
